@@ -1,6 +1,6 @@
 services:
   app:
-    image: superseriousbusiness/gotosocial:0.17.3
+    image: superseriousbusiness/gotosocial:0.18.2
     restart: "always"
     networks:
       - frontend
