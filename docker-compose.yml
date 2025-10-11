@@ -6,22 +6,29 @@ services:
       - frontend
     environment:
       - GTS_DB_TYPE=sqlite
-        # - GTS_PORT=80
       - GTS_DB_ADDRESS=/gotosocial/storage/sqlite.db
       - GTS_LETSENCRYPT_ENABLED=false
       - GTS_WAZERO_COMPILATION_CACHE=/gotosocial/.cache
       - GTS_LOG_LEVEL=warn
       - VIRTUAL_PORT=8080
       - GTS_TRUSTED_PROXIES=172.0.0.0/8
+      - GTS_ACCOUNT_DOMAIN=${GTS_ACCOUNT_DOMAIN}
+      - GTS_HOST=${GTS_HOST}
+      - VIRTUAL_HOST=${VIRTUAL_HOST}
+      - LETSENCRYPT_HOST=${LETSENCRYPT_HOST}
+      - LETSENCRYPT_EMAIL=${LETSENCRYPT_EMAIL}
+      - TZ=${TZ}
     ports:
       - "127.0.0.1:8080:8080"
     volumes:
       - data:/gotosocial/storage
       - cache:/gotosocial/.cache
 
-networks:
-  frontend:
-
 volumes:
   data:
   cache:
+
+networks:
+  frontend:
+    name: proxy_frontend
+    external: true
